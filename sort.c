@@ -3,20 +3,31 @@
 #include <stdlib.h>
 
 //Sort an array A using insertion sort. Notice it is to be passed by reference.
-void sort(/* what's the argument data type?*/ A, int n){
+void sort(/* what's the argument data type?*/int* A, int n){
 	int tmp;
 	int i;
 	int j;
+	
 
 	for(i=1; i<n; i++){
-		tmp = A[i];
+		int *ptr;
+		ptr = &A[i];
+		tmp = *ptr;
 		j=i-1;
+		int *ptr1 = ptr - 1;
+		printf("Inside for loop:\n");
+		printf("%d\n", tmp);
+		printf("%d\n", *ptr1);
 		//For each element in A, search for where it belong in the subarray preceeding it's current location
-		while(tmp<A[j] && j>=0){
-			A[j+1]=A[j];
+		while(tmp<(*ptr1) && j>=0){
+			int *ptr2 = (ptr1 + 1);
+			(*ptr2)=(*ptr1);
 			j-=1;
-		}
-		A[j+1]=tmp;
+			printf("Inside while loop:\n");
+			printf("%d\n", *ptr2);
+			printf("%d\n", *ptr1);
+		} 
+		*(ptr1 + 1)=tmp;
 	}
 }
 
@@ -30,7 +41,8 @@ int main(){
 	scanf("%d",&n);
 
 	//Array array. Change this to become a dynamic array through malloc.
-	int array[n];
+	// int array[n];
+	int *array = (int *)malloc(sizeof(n));
 
 	//Assign each element in the array a random number between 0 and 31,999
 	int i;
@@ -56,5 +68,7 @@ int main(){
 	}
 	printf("\n");
 	return 0;
+
+	free(array);
 
 }

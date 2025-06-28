@@ -1,15 +1,12 @@
 #include <stdio.h>
 
-int n;
-int i = 1;
-int fac4;
-int fac5;
+int i;
 
 int factorial (int n) {
-	
+	int i = 1;
 	while (n > 1) {
 		i = i * n;
-		int n = n - 1;
+		n = n - 1;
 	}
 	return i;
 }
